@@ -27,7 +27,6 @@ public class ConfigurationServices {
             throw new RuntimeException(e);
         }
     }
-
     public Configuration getConfiguration(){
         try{
             FileReader reader = new FileReader(CONFIG_FILE);

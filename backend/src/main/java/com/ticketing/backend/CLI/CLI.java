@@ -1,10 +1,16 @@
 package com.ticketing.backend.CLI;
 
+import com.ticketing.backend.Controllers.VendorController;
+import com.ticketing.backend.Services.VendorService;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
+import com.ticketing.backend.Services.TicketService;
+import com.ticketing.backend.Services.CustomerService;
+
+
 
 
 import java.io.File;
@@ -38,7 +44,7 @@ public class CLI {
     }
 
     @Bean
-    public CommandLineRunner runTicketingSystem() {
+    public CommandLineRunner runTicketingSystem(VendorController vendorController, VendorService vendorService, TicketService ticketService, CustomerService customerService) {
         return args -> { //check lambda
             Scanner scanner = new Scanner(System.in);
             InputValidation input = new InputValidation(scanner);
@@ -146,13 +152,14 @@ public class CLI {
                 writer.write(configSummary + "\n");
 
                 // Initialize the TicketPool
-                TicketPool ticketPool = new TicketPool(maxTicketCapacity, totalTickets);
+                TicketPool ticketPool = new TicketPool(maxTicketCapacity, totalTickets, ticketService);
 
                 // Start Vendor threads
                 Vendor[] vendors = new Vendor[numOfVendors];
                 for (int i = 0; i < vendors.length; i++) {
                     vendors[i] = new Vendor(ticketPool, totalTickets, (int) ticketReleaseRate);
                     Thread vendorThread = new Thread(vendors[i], "Vendor-" + (i + 1));
+
                     vendorThread.start();
                     writer.write("Vendor-" + (i + 1) + " thread started.\n");
                 }

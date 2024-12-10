@@ -1,0 +1,170 @@
+Customer-1 is waiting to buy a ticket...
+Vendor-1 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 1
+---> Total Tickets: 19
+
+Customer-4 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 0
+---> Total Tickets: 19
+
+Vendor-2 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 1
+---> Total Tickets: 18
+
+Customer-3 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 0
+---> Total Tickets: 18
+
+Customer-2 is waiting to buy a ticket...
+Customer-1 is waiting to buy a ticket...
+Vendor-1 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 1
+---> Total Tickets: 17
+
+Customer-2 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 0
+---> Total Tickets: 17
+
+Customer-1 is waiting to buy a ticket...
+Vendor-2 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 1
+---> Total Tickets: 16
+
+Customer-1 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 0
+---> Total Tickets: 16
+
+Vendor-1 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 1
+---> Total Tickets: 15
+
+Vendor-2 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 2
+---> Total Tickets: 14
+
+Customer-4 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 1
+---> Total Tickets: 14
+
+Customer-3 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 0
+---> Total Tickets: 14
+
+Vendor-1 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 1
+---> Total Tickets: 13
+
+Vendor-2 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 2
+---> Total Tickets: 12
+
+Customer-2 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 1
+---> Total Tickets: 12
+
+Customer-1 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 0
+---> Total Tickets: 12
+
+Vendor-1 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 1
+---> Total Tickets: 11
+
+Vendor-2 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 2
+---> Total Tickets: 10
+
+Vendor-1 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 3
+---> Total Tickets: 9
+
+Vendor-2 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 4
+---> Total Tickets: 8
+
+Customer-4 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 3
+---> Total Tickets: 8
+
+Customer-3 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 2
+---> Total Tickets: 8
+
+Vendor-1 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 3
+---> Total Tickets: 7
+
+Vendor-2 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 4
+---> Total Tickets: 6
+
+Customer-2 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 3
+---> Total Tickets: 6
+
+Customer-1 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 2
+---> Total Tickets: 6
+
+Vendor-1 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 3
+---> Total Tickets: 5
+
+Vendor-2 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 4
+---> Total Tickets: 4
+
+Vendor-1 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 5
+---> Total Tickets: 3
+
+Vendor-2 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 6
+---> Total Tickets: 2
+
+Customer-4 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 5
+---> Total Tickets: 2
+
+Customer-3 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 4
+---> Total Tickets: 2
+
+Vendor-1 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 5
+---> Total Tickets: 1
+
+Vendor-2 >> Ticket added to the pool. (++ Ticket)
+---> Available Tickets: 6
+---> Total Tickets: 0
+
+Customer-2 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 5
+---> Total Tickets: 0
+
+Customer-1 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 4
+---> Total Tickets: 0
+
+Customer-4 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 3
+---> Total Tickets: 0
+
+Customer-3 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 2
+---> Total Tickets: 0
+
+Customer-2 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 1
+---> Total Tickets: 0
+
+Customer-1 >> Ticket purchased successfully. (-- Ticket)
+---> Ticket Queue: 0
+---> Total Tickets: 0
+
+All tickets are sold out. Vendor-1 will stop adding tickets.
+All tickets are sold out. Vendor-2 will stop adding tickets.
+All tickets are sold out.
+All tickets are sold out.
+All tickets are sold out.
+All tickets are sold out.

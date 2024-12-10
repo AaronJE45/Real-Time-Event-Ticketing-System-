@@ -1,0 +1,20 @@
+<div class="text-6xl md:text-5xl font-bold flex flex-row justify-start items-start pt-[5rem] pl-[2rem]">
+    Ticket Simulation
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 ">
+    <!-- Form Card -->
+     <app-form></app-form>
+    <!-- Status Card -->
+    <div class="col-span-2 bg-white shadow-xl rounded-lg p-6 border-black">
+      <h2 class="text-xl font-bold mb-4 text-gray-800">Status</h2>
+      <div class="text-lg">
+        <p *ngIf="isRunning" class="text-green-600">System is running...</p>
+        <p *ngIf="!isRunning" class="text-red-600">System is stopped.</p>
+      </div>
+      <!-- <div class="mt-4">
+        <p class="text-gray-700 font-medium">Last Submitted Data:</p>
+        <pre class="text-gray-600">{{ formData | json }}</pre>
+      </div> -->
+    </div>
+  </div>
+  

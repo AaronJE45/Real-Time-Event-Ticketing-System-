@@ -3,6 +3,7 @@ package com.ticketing.backend.CLI;
 import java.math.BigDecimal;
 import java.util.Date;
 
+
 public class Ticket {
     private int ticketId;
     private String ticketName;

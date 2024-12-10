@@ -1,5 +1,8 @@
 package com.ticketing.backend.CLI;
 
+import com.ticketing.backend.Services.TicketService;
+import com.ticketing.backend.Models.Ticket;
+
 import java.util.LinkedList;
 import java.util.Queue;
 import java.io.FileWriter;
@@ -9,12 +12,14 @@ public class TicketPool {
     private final Queue<Ticket> ticketQueue; //doubt
     private final int maximumCapacity;
     private int totalTickets;
+    private TicketService ticketService;
 
     // Constructor to initialize TicketPool with maximum capacity and total tickets
-    public TicketPool(int maximumCapacity, int totalTickets) {
+    public TicketPool(int maximumCapacity, int totalTickets, TicketService ticketService) {
         this.maximumCapacity = maximumCapacity;
         this.ticketQueue = new LinkedList<>();
-        this.totalTickets = totalTickets; // Set the initial number of tickets
+        this.totalTickets = totalTickets;
+        this.ticketService = ticketService;
     }
 
     // Method to write logs into a file
@@ -52,6 +57,7 @@ public class TicketPool {
 
         // Add ticket to the queue if there are still tickets to add
         ticketQueue.add(ticket);
+        ticketService.createTicket(ticket);
         totalTickets--;
         String addMessage = String.format("%s >> Ticket added to the pool. (++ Ticket)\n---> Ticket Queue: %d\n---> Total Tickets: %d\n",
                 Thread.currentThread().getName(), ticketQueue.size(), totalTickets);
@@ -75,7 +81,6 @@ public class TicketPool {
                 return null;  // Exit gracefully if interrupted
             }
         }
-
         // If no tickets are left, inform the customer and return null
         if (ticketQueue.isEmpty() && totalTickets == 0) {
             String noTicketsMessage = "All tickets are sold out.";

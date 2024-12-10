@@ -1,0 +1,99 @@
+<div class="col-span-1 bg-white shadow-xl rounded-lg p-6 ">
+    <form (ngSubmit)="onSubmit()">
+      <!-- Number of Vendors -->
+      <div class="mb-4">
+        <label for="vendors" class="block text-gray-700 font-medium mb-2">Number of Vendors:</label>
+        <input
+          id="vendors"
+          type="number"
+          [(ngModel)]="formData.numofVendors"
+          name="vendors"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950"
+          placeholder="Eg: 10"
+          required
+        />
+      </div>
+      <!-- Number of Customers -->
+      <div class="mb-4">
+        <label for="customers" class="block text-gray-700 font-medium mb-2">Number of Customers:</label>
+        <input
+          id="customers"
+          type="number"
+          [(ngModel)]="formData.numofCustomers"
+          name="customers"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950"
+          placeholder="Eg: 50"
+          required
+        />
+      </div>
+      <!-- Total Tickets for Vendors -->
+      <div class="mb-4">
+        <label for="tickets" class="block text-gray-700 font-medium mb-2">Total Tickets for Vendors:</label>
+        <input
+          id="tickets"
+          type="number"
+          [(ngModel)]="formData.totalTickets"
+          name="tickets"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950"
+          placeholder="Eg: 500"
+          required
+        />
+      </div>
+      <!-- Ticket Retrieval Rate -->
+      <div class="mb-4">
+        <label for="retrievalRate" class="block text-gray-700 font-medium mb-2">Ticket Release Rate (per second):</label>
+        <input
+          id="retrievalRate"
+          type="number"
+          [(ngModel)]="formData.ticketReleaseRate"
+          name="retrievalRate"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950"
+          placeholder="Eg: 2"
+          required
+        />
+      </div>
+      <!-- Customer Retrieval Rate -->
+      <div class="mb-4">
+        <label for="customerRate" class="block text-gray-700 font-medium mb-2">Customer Retrieval Rate (per second):</label>
+        <input
+          id="customerRate"
+          type="number"
+          [(ngModel)]="formData.customerRetrievalRate"
+          name="customerRate"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950"
+          placeholder="Eg: 3"
+          required
+        />
+      </div>
+      <!-- Maximum Ticket Capacity -->
+      <div class="mb-4">
+        <label for="capacity" class="block text-gray-700 font-medium mb-2">Maximum Ticket Capacity:</label>
+        <input
+          id="capacity"
+          type="number"
+          [(ngModel)]="formData.maximumCapacity"
+          name="capacity"
+          class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-950"
+          placeholder="Eg: 1000"
+          required
+        />
+      </div>
+      <!-- Submit and Start/Stop Buttons -->
+      <div class="flex justify-between">
+        <button
+          type="submit"
+          class="px-4 py-2 bg-black hover:bg-white hover:text-black hover:border-black text-white rounded">
+          Submit
+        </button>
+        <button
+          type="number"
+          (click)="toggleStartStop()"
+          class="px-4 py-2 rounded hover:opacity-90"
+          [class.bg-red-500]="isRunning"
+          [class.bg-green-500]="!isRunning"
+          [class.text-white]="true">
+          {{ isRunning ? 'Stop' : 'Start' }}
+        </button>
+      </div>
+    </form>
+  </div>
