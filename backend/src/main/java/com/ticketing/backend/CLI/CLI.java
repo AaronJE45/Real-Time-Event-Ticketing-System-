@@ -152,7 +152,7 @@ public class CLI {
                 writer.write(configSummary + "\n");
 
                 // Initialize the TicketPool
-                TicketPool ticketPool = new TicketPool(maxTicketCapacity, totalTickets, ticketService);
+                TicketPool ticketPool = new TicketPool(maxTicketCapacity, totalTickets);
 
                 // Start Vendor threads
                 Vendor[] vendors = new Vendor[numOfVendors];

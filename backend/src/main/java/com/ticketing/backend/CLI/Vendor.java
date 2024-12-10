@@ -1,7 +1,7 @@
 package com.ticketing.backend.CLI;
 
 import com.ticketing.backend.Models.Ticket;
-import com.ticketing.backend.Services.VendorService;
+
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -29,7 +29,6 @@ public class Vendor implements Runnable {
                 e.printStackTrace();
                 throw new RuntimeException(e.getMessage());
             }
-
         }
     }
 }

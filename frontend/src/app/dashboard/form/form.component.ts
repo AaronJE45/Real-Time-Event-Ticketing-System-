@@ -32,7 +32,7 @@ export class FormComponent {
 
   onSubmit(): void {
     console.log('Form data:', this.formData);
-    this.http.post('http://localhost:8080/api/saveform', this.formData).subscribe({
+    this.http.post('http://localhost:8080/loadconfig', this.formData).subscribe({
       next: (response) => {
         console.log('Configuration saved successfully!', response);
       },

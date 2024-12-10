@@ -10,20 +10,27 @@ import org.springframework.stereotype.Service;
 public class SimulationService {
 
     public synchronized void startSimulation(Configuration config) {
-        TicketPool ticketPool = new TicketPool(
-                config.getMaximumCapacity(),
-                config.getTotalTickets(),
-                new TicketService()
-        );
 
-        for (int i = 0; i < config.getNumberOfVendors(); i++) {
-            Vendor vendor = new Vendor(ticketPool, config.getTotalTickets(), (int) config.getTicketReleaseRate());
-            new Thread(vendor, "Vendor-" + (i + 1)).start();
+        //Declaring and initializing parameters through config body
+        int numOfVendors = config.getNumberOfVendors();
+        int numOfCustomers = config.getNumberOfCustomers();
+        int totalTickets = config.getTotalTickets();
+        int maximumCapacity = config.getMaximumCapacity();
+        double ticketReleaseRate = config.getTicketReleaseRate();
+        double customerRetrievalRate = config.getCustomerRetrievalRate();
+
+        TicketPool ticketPool = new TicketPool(maximumCapacity,totalTickets);
+
+        for (int i = 0; i < numOfVendors; i++) {
+            Vendor vendor = new Vendor(ticketPool, totalTickets, (int) ticketReleaseRate);
+            Thread vendorThread = new Thread(vendor, "Vendor-" + (i + 1));
+            vendorThread.start();
         }
 
-        for (int i = 0; i < config.getNumberOfCustomers(); i++) {
-            Customer customer = new Customer(ticketPool, (int) config.getCustomerRetrievalRate(), config.getTotalTickets());
-            new Thread(customer, "Customer-" + (i + 1)).start();
+        for (int i = 0; i < numOfCustomers; i++) {
+            Customer customer = new Customer(ticketPool, (int) customerRetrievalRate, totalTickets);
+            Thread cusomerThread = new Thread(customer, "Customer-" + (i + 1));
+            cusomerThread.start();
         }
     }
 }
