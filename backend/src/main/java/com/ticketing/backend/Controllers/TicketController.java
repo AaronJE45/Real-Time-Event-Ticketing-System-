@@ -36,9 +36,6 @@ public class TicketController {
         return "All Tickets Deleted Successfully";
     }
 
-    @GetMapping("/status")
-    public List<Ticket> getTicketStatus() {
 
-    }
 
 }
