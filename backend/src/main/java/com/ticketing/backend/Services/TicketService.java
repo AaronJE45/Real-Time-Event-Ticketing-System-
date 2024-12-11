@@ -1,5 +1,6 @@
 package com.ticketing.backend.Services;
 
+import com.ticketing.backend.CLI.TicketPool;
 import com.ticketing.backend.Models.Ticket;
 import com.ticketing.backend.Repositories.TicketRepository;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,11 @@ import java.util.List;
 @Service
 public class TicketService {
 
-    private TicketRepository ticketRepository;
+    private final TicketRepository ticketRepository;
+
+    public TicketService(TicketRepository ticketRepository) {
+        this.ticketRepository = ticketRepository;
+    }
 
     public Ticket createTicket(Ticket ticket) {
         return ticketRepository.save(ticket);
@@ -31,8 +36,6 @@ public class TicketService {
     public void deleteAllTickets() {
         ticketRepository.deleteAll();
     }
-
-
 
     
 }

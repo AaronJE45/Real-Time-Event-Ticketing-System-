@@ -1,5 +1,6 @@
 package com.ticketing.backend.Controllers;
 
+import com.ticketing.backend.CLI.TicketPool;
 import com.ticketing.backend.Models.Ticket;
 import com.ticketing.backend.Services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/tickets")
 public class TicketController {
-
     @Autowired
     private TicketService ticketService;
 
@@ -35,4 +35,10 @@ public class TicketController {
         ticketService.deleteAllTickets();
         return "All Tickets Deleted Successfully";
     }
+
+    @GetMapping("/status")
+    public List<Ticket> getTicketStatus() {
+
+    }
+
 }

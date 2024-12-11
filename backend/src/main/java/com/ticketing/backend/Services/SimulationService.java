@@ -1,17 +1,30 @@
 package com.ticketing.backend.Services;
 
-import com.ticketing.backend.CLI.Configuration;
-import com.ticketing.backend.CLI.Customer;
-import com.ticketing.backend.CLI.TicketPool;
-import com.ticketing.backend.CLI.Vendor;
+import com.ticketing.backend.CLI.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
+// Updated SimulationService
 @Service
 public class SimulationService {
+    private final LogService logService;
+    private List<String> simulationLogs = new ArrayList<>();
+    private final List<Thread> vendorThreads = new ArrayList<>();
+    private final List<Thread> customerThreads = new ArrayList<>();
+    private TicketService ticketService;
+
+    public SimulationService(LogService logService, TicketService ticketService) {
+        this.logService = logService;
+        this.ticketService = ticketService;
+    }
 
     public synchronized void startSimulation(Configuration config) {
 
-        //Declaring and initializing parameters through config body
+        ConfigurationServices configurationServices = new ConfigurationServices();
+        simulationLogs.clear();
+
         int numOfVendors = config.getNumberOfVendors();
         int numOfCustomers = config.getNumberOfCustomers();
         int totalTickets = config.getTotalTickets();
@@ -19,19 +32,38 @@ public class SimulationService {
         double ticketReleaseRate = config.getTicketReleaseRate();
         double customerRetrievalRate = config.getCustomerRetrievalRate();
 
-        TicketPool ticketPool = new TicketPool(maximumCapacity,totalTickets);
+        configurationServices.setConfiguration(config);
 
-        for (int i = 0; i < numOfVendors; i++) {
-            Vendor vendor = new Vendor(ticketPool, totalTickets, (int) ticketReleaseRate);
-            Thread vendorThread = new Thread(vendor, "Vendor-" + (i + 1));
+        TicketPool ticketPool = new TicketPool(maximumCapacity, totalTickets, logService);
+
+
+        // Start Vendor Threads
+        Vendor[] vendors = new Vendor[numOfVendors];
+        for (int i = 0; i < vendors.length; i++) {
+            vendors[i] = new Vendor(ticketPool, totalTickets, (int) ticketReleaseRate,ticketService);
+            Thread vendorThread = new Thread(vendors[i], "Vendor-" + (i + 1));
+
             vendorThread.start();
+            vendorThreads.add(vendorThread);
+            simulationLogs.add("Thread Vendor-" + (i + 1) + " started.");
         }
 
-        for (int i = 0; i < numOfCustomers; i++) {
-            Customer customer = new Customer(ticketPool, (int) customerRetrievalRate, totalTickets);
-            Thread cusomerThread = new Thread(customer, "Customer-" + (i + 1));
-            cusomerThread.start();
+        // Start Customer Threads
+        Customer[] customers = new Customer[numOfCustomers];
+        for (int i = 0; i < customers.length; i++) {
+            customers[i] = new Customer(ticketPool, (int) customerRetrievalRate, totalTickets, logService);
+            Thread customerThread = new Thread(customers[i], "Customer-" + (i + 1));
+            customerThread.start();
+            customerThreads.add(customerThread);
+            simulationLogs.add("Thread Customer-" + (i + 1) + " started.");
+        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
+
 }
+
 

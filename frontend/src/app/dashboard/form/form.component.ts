@@ -41,4 +41,24 @@ export class FormComponent {
       }
     });
   }
+
+  stopSimulation(): void {
+    this.http.post('/stopSimulation', {}).subscribe({
+      next: (response) => {
+        console.log('Simulation stopped successfully:', response);
+        alert('Simulation has been stopped.');
+      },
+      error: (error) => {
+        console.error('Error stopping simulation:', error);
+        alert('Failed to stop the simulation. Please try again.');
+      },
+      complete: () => {
+        console.log('Stop simulation request completed.');
+      }
+    });
+  }
+
+  
+
+  
 }

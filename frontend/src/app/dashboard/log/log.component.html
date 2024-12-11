@@ -1,0 +1,6 @@
+<h2>Simulation Logs</h2>
+    <div *ngIf="simulationRunning">Simulation is running...</div>
+    <ul *ngIf="!simulationRunning">
+      <li *ngFor="let log of logs">{{ log }}</li>
+    </ul>
+  

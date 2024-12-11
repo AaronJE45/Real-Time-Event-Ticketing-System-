@@ -1,36 +1,36 @@
 package com.ticketing.backend.Controllers;
 
 import com.ticketing.backend.CLI.Configuration;
-import com.ticketing.backend.CLI.Customer;
-import com.ticketing.backend.CLI.TicketPool;
-import com.ticketing.backend.CLI.Vendor;
+import com.ticketing.backend.Services.LogService;
 import com.ticketing.backend.Services.SimulationService;
-import com.ticketing.backend.Services.TicketService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 @RestController
 public class SimulationController {
+    private LogService logService;
 
     private SimulationService simulationService;
 
-    public SimulationController(SimulationService simulationService) {
+    public SimulationController(SimulationService simulationService, LogService logService) {
         this.simulationService = simulationService;
+        this.logService = logService;
     }
 
     @PostMapping("/loadconfig")
-    public ResponseEntity<String> loadConfiguration(@RequestBody Configuration config) {
+    public String loadConfiguration(@RequestBody Configuration config) {
 
         if (config == null) {
-            return ResponseEntity.badRequest().body("{\"message\": \"Configuration not successfully\"}");
+            return "Configuration is null";
         }
-
         simulationService.startSimulation(config);
-        return ResponseEntity.ok("{\"message\": \"Configuration successfully loaded\"}");
+        return "Simulation started";
+    }
+
+    @GetMapping("/logs")
+    public List<String> getLogs() {
+        List<String> logs = logService.getSynchronizedLogs();
+        return logs;
     }
 }

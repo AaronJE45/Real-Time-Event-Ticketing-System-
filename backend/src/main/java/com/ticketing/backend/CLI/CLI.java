@@ -1,16 +1,12 @@
 package com.ticketing.backend.CLI;
 
-import com.ticketing.backend.Controllers.VendorController;
-import com.ticketing.backend.Services.VendorService;
+import com.ticketing.backend.Services.*;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import com.ticketing.backend.Services.TicketService;
-import com.ticketing.backend.Services.CustomerService;
-
-
+import org.springframework.stereotype.Component;
 
 
 import java.io.File;
@@ -20,6 +16,11 @@ import java.util.Scanner;
 
 @SpringBootApplication
 public class CLI {
+    private LogService logService;
+
+    public CLI(LogService logService) {
+        this.logService = logService;
+    }
     public static void main(String[] args) {
         System.out.println("Starting Ticketing System...");
 
@@ -44,7 +45,7 @@ public class CLI {
     }
 
     @Bean
-    public CommandLineRunner runTicketingSystem(VendorController vendorController, VendorService vendorService, TicketService ticketService, CustomerService customerService) {
+    public CommandLineRunner runTicketingSystem( TicketService ticketService) {
         return args -> { //check lambda
             Scanner scanner = new Scanner(System.in);
             InputValidation input = new InputValidation(scanner);
@@ -152,12 +153,12 @@ public class CLI {
                 writer.write(configSummary + "\n");
 
                 // Initialize the TicketPool
-                TicketPool ticketPool = new TicketPool(maxTicketCapacity, totalTickets);
+                TicketPool ticketPool = new TicketPool(maxTicketCapacity, totalTickets,logService);
 
                 // Start Vendor threads
                 Vendor[] vendors = new Vendor[numOfVendors];
                 for (int i = 0; i < vendors.length; i++) {
-                    vendors[i] = new Vendor(ticketPool, totalTickets, (int) ticketReleaseRate);
+                    vendors[i] = new Vendor(ticketPool, totalTickets, (int) ticketReleaseRate,ticketService);
                     Thread vendorThread = new Thread(vendors[i], "Vendor-" + (i + 1));
 
                     vendorThread.start();
@@ -167,7 +168,7 @@ public class CLI {
                 // Start Customer threads
                 Customer[] customers = new Customer[numOfCustomers];
                 for (int i = 0; i < customers.length; i++) {
-                    customers[i] = new Customer(ticketPool, (int) customerRetrievalRate, totalTickets);
+                    customers[i] = new Customer(ticketPool, (int) customerRetrievalRate, totalTickets,logService);
                     Thread customerThread = new Thread(customers[i], "Customer-" + (i + 1));
                     customerThread.start();
                     writer.write("Customer-" + (i + 1) + " thread started.\n");
