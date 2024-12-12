@@ -36,6 +36,4 @@ public class TicketController {
         return "All Tickets Deleted Successfully";
     }
 
-
-
 }
